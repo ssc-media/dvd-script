@@ -18,6 +18,11 @@
 ## 必要な環境など
 
 - OS: CentOS 8
+- ソフトウェア
+  - [FFmpeg](https://ffmpeg.org/)
+  - [dvdauthor](http://dvdauthor.sourceforge.net/)
+  - mkisofs ([genisoimage](http://cdrkit.org/) に含まれるコマンド)
+  - dvdrecord ([wodim](http://cdrkit.org/) に含まれるコマンド)
 - ハードコードされた事項 (適宜、使用者で調整してください。)
   - ビデオファイルは `~/Videos/` の下に生成され、形式は `obs-%Y%m%d-%H%M.flv` である必要があります。
   - 祈祷会は19:30に始まり、日曜日の礼拝は10:25に始まります。

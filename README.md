@@ -20,6 +20,11 @@ In this script, these features are implemented.
 ## Prerequisition
 
 - OS: CentOS 8
+- Software
+  - [FFmpeg](https://ffmpeg.org/)
+  - [dvdauthor](http://dvdauthor.sourceforge.net/)
+  - mkisofs provided by [genisoimage](http://cdrkit.org/)
+  - dvdrecord provided by [wodim](http://cdrkit.org/)
 - Hardcoded items
   - Video files should be generated under `~/Videos/` and the format should be `obs-%Y%m%d-%H%M.flv`.
   - Prayer meeting starts at 19:30, Sunday service starts at 10:25.
