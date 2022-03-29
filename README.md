@@ -1,5 +1,7 @@
 # Sakae Shalom Church DVD-Video Scripts
 
+[Japanese translation is here.](README-ja.md)
+
 ## Features
 
 This scripts create DVD-Video for the prayer meeting and Sunday service and automatically burn into DVD-R media.
