@@ -1,7 +1,5 @@
 #! /bin/bash
 
-t=1
-
 opt_first_cont=--first
 send_mail=1
 
@@ -22,16 +20,12 @@ function wait_blank_dvd
 while wait_blank_dvd; do
 	if make burn; then
 		date -R >> burn-loop.log
-		t=1
 		opt_first_cont=--continue
 		send_mail=1
 	else
 		if ((send_mail)); then
 			$(dirname $0)/burn-email.sh ${opt_first_cont}
 			send_mail=0
-		fi
-		if ((t<7)); then
-			t=$((t*2))
 		fi
 	fi
 done
