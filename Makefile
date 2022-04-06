@@ -56,7 +56,7 @@ dvdvideo-${date}.xml:
 	./script/mkdvdvideo-xml.sh $(dvd_sources) > $@.t
 	mv $@.t $@
 
-dvdvideo-${date}.iso: dvdvideo-${date}.xml dvdvideo-${date}.mpg
+dvdvideo-${date}.iso: dvdvideo-${date}.xml ${dvd_sources}
 	./script/mkdvdvideo-iso.sh dvdvideo-${date}.xml $@.iso
 	test `wc -c < $@.iso` -le ${dvd_max}
 	mv $@.iso $@
