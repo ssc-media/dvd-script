@@ -27,5 +27,6 @@ while wait_blank_dvd; do
 			$(dirname $0)/burn-email.sh ${opt_first_cont}
 			send_mail=0
 		fi
+		sleep 10
 	fi
 done
