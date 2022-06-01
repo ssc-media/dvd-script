@@ -63,4 +63,4 @@ dvdvideo-${date}.iso: dvdvideo-${date}.xml ${dvd_sources}
 
 burn: dvdvideo-${date}.iso
 	test `wc -c < dvdvideo-${date}.iso` -le ${dvd_max}
-	dvdrecord -v -dao -speed=6 dev=/dev/cdrom -eject ${PWD}/dvdvideo-${date}.iso
+	env CDR_NODMATEST=1 dvdrecord -v -dao -speed=6 dev=/dev/cdrom fs=1024k -eject ${PWD}/dvdvideo-${date}.iso
