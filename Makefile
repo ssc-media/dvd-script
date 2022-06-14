@@ -1,8 +1,11 @@
 
 ffmpeg=env LD_LIBRARY_PATH=/usr/local/lib: /usr/local/bin/ffmpeg -hide_banner
+ffmpeg_dvd_opt=-vf yadif=1,setsar=1:1,scale=720:480,tinterlace=4 -target ntsc-dvd -flags +ilme+ildct -b:v 2500k
 dvd_max=4707319808
 
 include files.mak
+
+.SUFFIXES: .mpg .mp4 .flv .mkv
 
 step0: \
 	step0-remove-old-files
@@ -33,23 +36,30 @@ obs-${date}-audio-edit.wav: ${obs_wav}
 	./script/autogain.sh ${obs_wav} $@
 endif
 
-step2: ${obs_edited} dvdvideo-${date}.mpg step2_dvd_${run_dvd}
+step2: step2-encode step2_dvd_${run_dvd}
 
 ${obs_edited}: ${obs_flv_cut} obs-${date}-audio-edit.wav
 	${ffmpeg} -i ${obs_flv_cut} -i obs-${date}-audio-edit.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 253k -y .${obs_edited}
 	mv .${obs_edited} ${obs_edited}
 
-step2_dvdvideo_y: dvdvideo-${date}.mpg
-step2_dvdvideo_${run_dvdvideo}:
+step2_encode: ${obs_edited} ${dvd_sources}
+	echo skip_dvdvideo_encode=y >> files.mak
 
 step2_dvd_y: dvdvideo-${date}.xml dvdvideo-${date}.iso
 step2_dvd_${run_dvd}:
 
 ifneq (${skip_dvdvideo_encode},y)
-dvdvideo-${date}.mpg: ${obs_edited}
-	${ffmpeg} -i ${obs_edited} -vf yadif=1,setsar=1:1,scale=720:480,tinterlace=4 -target ntsc-dvd -flags +ilme+ildct -b:v 2500k -y $@.mpg
+%.mpg: %.flv
+	${ffmpeg} -i $< ${ffmpeg_dvd_opt} -y $@.mpg
 	mv $@.mpg $@
-	echo skip_dvdvideo_encode=y >> files.mak
+
+%.mpg: %.mp4
+	${ffmpeg} -i $< ${ffmpeg_dvd_opt} -y $@.mpg
+	mv $@.mpg $@
+
+%.mpg: %.flv
+	${ffmpeg} -i $< ${ffmpeg_dvd_opt} -y $@.mpg
+	mv $@.mpg $@
 endif
 
 dvdvideo-${date}.xml:

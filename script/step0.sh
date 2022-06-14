@@ -31,7 +31,7 @@ dvd_sources=${dvd_sources}
 # outputs
 obs_flv_cut=obs-${date}-cut.flv
 obs_wav=obs-${date}-cut.wav
-obs_edited=obs-${date}-edited.flv
+obs_edited=dvdvideo-${date}.flv
 
 # flow switches
 run_dvd=${run_dvd}
