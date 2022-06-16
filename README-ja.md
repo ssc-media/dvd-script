@@ -17,7 +17,7 @@
 
 ## 必要な環境など
 
-- OS: CentOS 8
+- OS: CentOS 8 または CentOS Stream 9, Fedora 34
 - ソフトウェア
   - [FFmpeg](https://ffmpeg.org/)
   - [dvdauthor](http://dvdauthor.sourceforge.net/)

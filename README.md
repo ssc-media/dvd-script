@@ -19,7 +19,7 @@ In this script, these features are implemented.
 
 ## Prerequisition
 
-- OS: CentOS 8
+- OS: CentOS 8, CentOS Stream 9, or Fedora 34
 - Software
   - [FFmpeg](https://ffmpeg.org/)
   - [dvdauthor](http://dvdauthor.sourceforge.net/)
