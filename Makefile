@@ -36,7 +36,7 @@ obs-${date}-audio-edit.wav: ${obs_wav}
 	./script/autogain.sh ${obs_wav} $@
 endif
 
-step2: step2-encode step2_dvd_${run_dvd}
+step2: step2_encode step2_dvd_${run_dvd}
 
 ${obs_edited}: ${obs_flv_cut} obs-${date}-audio-edit.wav
 	${ffmpeg} -i ${obs_flv_cut} -i obs-${date}-audio-edit.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 253k -y .${obs_edited}
