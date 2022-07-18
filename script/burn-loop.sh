@@ -17,7 +17,7 @@ function wait_blank_dvd
 	done
 }
 
-while wait_blank_dvd; do
+while true; do
 	if make burn; then
 		date -R >> burn-loop.log
 		opt_first_cont=--continue
@@ -29,4 +29,5 @@ while wait_blank_dvd; do
 		fi
 		sleep 10
 	fi
+	wait_blank_dvd
 done
