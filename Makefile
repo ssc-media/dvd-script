@@ -1,5 +1,5 @@
 
-ffmpeg=env LD_LIBRARY_PATH=/usr/local/lib: /usr/local/bin/ffmpeg -hide_banner
+ffmpeg=ffmpeg -hide_banner
 ffmpeg_dvd_opt=-vf yadif=1,setsar=1:1,scale=720:480,tinterlace=4 -target ntsc-dvd -flags +ilme+ildct -b:v 2500k
 dvd_max=4707319808
 
