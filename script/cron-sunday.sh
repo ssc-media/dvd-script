@@ -28,5 +28,5 @@ make -k step2 &> step2.out || msg_failure step2.out
 rm -f obs-${d}-cut.wav obs-${d}-audio-edit.wav
 
 if test -e dvdvideo-${d}.iso; then
-	echo timeout 4d ./script/burn-loop.sh | batch &> burn-loop-batch.out
+	echo 'timeout 4d ./script/burn-loop.sh &>> burn-loop-batch.out' | batch &> burn-loop-batch.out
 fi
