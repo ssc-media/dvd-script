@@ -76,5 +76,5 @@ else
 	msg=''
 fi
 if test -n "$msg"; then
-	~/script/dd.py --channel 'automation' --send-text "$msg"
+	~/script/dd.py --channel 'dvd-automation' --send-text "$msg"
 fi

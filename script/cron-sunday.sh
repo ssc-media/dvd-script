@@ -18,7 +18,7 @@ cd $d || exit 1
 function msg_failure
 {
 	( echo Failed to burn DVD; cat "$@" | grep -v '\r' | tail ) |
-	~/script/dd.py --channel 'automation' --send-text -
+	~/script/dd.py --channel 'dvd-automation' --send-text -
 }
 
 make step0 &> step0.out || true
