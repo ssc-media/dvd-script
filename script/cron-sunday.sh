@@ -9,7 +9,7 @@ if test ! -d $d; then
 	ln -sf $d/script ./
 fi
 
-while lsof ~/Videos/obs-${d}-10????.flv | awk -v r=1 '$4~/w/{r=0} END{exit(r)}'; do
+while lsof ~/Videos/obs-${d}-10????.??? | awk -v r=1 '$4~/w/{r=0} END{exit(r)}'; do
 	sleep 2m
 done
 
