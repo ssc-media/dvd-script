@@ -11,7 +11,7 @@ case $(LANG=C date -d $date +%a) in
 		obs_recording_ss=15
 		run_dvd=y
 		ymd_fri="$(date -d "$date - 2days" +%Y%m%d)"
-		dvd_sources="$(ls ../${ymd_fri}/dvdvideo-${ymd_fri}.mpg || :) dvdvideo-${date}.mpg)"
+		dvd_sources="$(ls ../${ymd_fri}/dvdvideo-${ymd_fri}.mpg || :) dvdvideo-${date}.mpg"
 		;;
 esac
 recording=$(ls -S ~/Videos/obs-${date}-*.{flv,mkv} | head -n 1)
