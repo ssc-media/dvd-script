@@ -4,17 +4,18 @@ date=$(basename $(pwd))
 obs_recording_ss=0
 case $(LANG=C date -d $date +%a) in
 	Fri)
+		recording=$(ls -S ~/Videos/obs-${date}-19*.{flv,mkv} | head -n 1)
 		obs_recording_ss=45
 		run_dvd=n
 		;;
 	Sun)
+		recording=$(ls -S ~/Videos/obs-${date}-10*.{flv,mkv} | head -n 1)
 		obs_recording_ss=15
 		run_dvd=y
 		ymd_fri="$(date -d "$date - 2days" +%Y%m%d)"
 		dvd_sources="$(ls ../${ymd_fri}/dvdvideo-${ymd_fri}.mpg || :) dvdvideo-${date}.mpg"
 		;;
 esac
-recording=$(ls -S ~/Videos/obs-${date}-*.{flv,mkv} | head -n 1)
 if (($? > 0)); then exit 1; fi
 
 case "$recording" in
