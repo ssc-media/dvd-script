@@ -5,7 +5,7 @@ cd ~/dvd
 d=$(date -d 'this Friday' +%Y%m%d)
 
 if test ! -d $d; then
-	git clone -q $(date -d 'last Sunday' +%Y%m%d) $d
+	git clone -q bare $d
 	ln -sf $d/script ./
 fi
 
