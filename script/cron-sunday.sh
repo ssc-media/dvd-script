@@ -1,5 +1,7 @@
 #! /bin/bash
 
+set -e
+
 cd ~/dvd
 
 d=$(date -d 'this Sunday' +%Y%m%d)
