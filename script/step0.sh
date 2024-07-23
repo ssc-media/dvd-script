@@ -7,6 +7,7 @@ case $(LANG=C date -d $date +%a) in
 		recording=$(ls -S ~/Videos/obs-${date}-19*.{flv,mkv} | head -n 1)
 		obs_recording_ss=45
 		run_dvd=n
+		dvd_sources="dvdvideo-${date}.mpg"
 		;;
 	Sun)
 		recording=$(ls -S ~/Videos/obs-${date}-10*.{flv,mkv} | head -n 1)
