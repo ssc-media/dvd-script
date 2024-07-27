@@ -19,7 +19,7 @@ $(has_files_mak)files.mak:
 	./script/step0.sh > $@.t
 	mv $@.t $@
 
-step1: ${obs_recording_cut} ${obs_wav}
+step1: ${obs_recording_cut}
 	echo skip_video_encode_obs=y >> files.mak
 
 ifneq (${skip_video_encode_obs},y)
@@ -28,12 +28,11 @@ ${obs_recording_cut}: ${obs_recording}
 	mv .$@ $@
 endif
 
-${obs_wav}: ${obs_recording_cut}
-	${ffmpeg} -i ${obs_recording_cut} ${obs_wav}
-
 ifeq (${volume_auto},y)
-obs-${date}-audio-edit.wav: ${obs_wav}
-	./script/autogain.sh ${obs_wav} $@
+obs-${date}-audio-edit.wav: ${obs_recording_cut}
+	${ffmpeg} -i ${obs_recording_cut} /dev/shm/obs-${date}-cut.wav
+	./script/autogain.sh /dev/shm/obs-${date}-cut.wav $@
+	rm -f /dev/shm/obs-${date}-cut.wav
 endif
 
 step2: step2_encode step2_dvd_${run_dvd}

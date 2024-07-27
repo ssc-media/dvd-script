@@ -43,7 +43,6 @@ dvd_sources=${dvd_sources}
 
 # outputs
 obs_recording_cut=obs-${date}-cut.$obs_recording_fmt
-obs_wav=obs-${date}-cut.wav
 obs_edited=dvdvideo-${date}.$obs_recording_fmt
 
 # flow switches
