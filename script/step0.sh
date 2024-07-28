@@ -42,7 +42,6 @@ obs_recording_inp_opt=-ss ${obs_recording_ss} -to ${obs_recording_to}
 dvd_sources=${dvd_sources}
 
 # outputs
-obs_recording_cut=obs-${date}-cut.$obs_recording_fmt
 obs_edited=dvdvideo-${date}.$obs_recording_fmt
 
 # flow switches

@@ -22,5 +22,3 @@ function msg_failure
 make step0 &> step0.out || true
 make -k step1 &> step1.out || true
 make -k step2 &> step2.out || msg_failure step2.out
-
-rm -f obs-${d}-cut.wav obs-${d}-audio-edit.wav

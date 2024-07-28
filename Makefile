@@ -2,10 +2,12 @@
 ffmpeg=ffmpeg -hide_banner
 ffmpeg_dvd_opt=-vf yadif=1,setsar=1:1,scale=720:480,tinterlace=4 -target ntsc-dvd -flags +ilme+ildct -b:v 2500k
 dvd_max=4707319808
+loudnorm_i=-23.0
 
 include files.mak
 
 .SUFFIXES: .mpg .mp4 .flv .mkv
+.PRECIOUS: .txt .mpg .flv .mkv
 
 step0: \
 	step0-remove-old-files
@@ -19,29 +21,23 @@ $(has_files_mak)files.mak:
 	./script/step0.sh > $@.t
 	mv $@.t $@
 
-step1: ${obs_recording_cut}
-	echo skip_video_encode_obs=y >> files.mak
+step1: ${obs_edited}
 
-ifneq (${skip_video_encode_obs},y)
-${obs_recording_cut}: ${obs_recording}
-	${ffmpeg} ${obs_recording_inp_opt} -i ${obs_recording} -c copy .$@
+obs-${date}-cut.loudnorm.txt: ${obs_recording}
+	${ffmpeg} ${obs_recording_inp_opt} -i ${obs_recording} -map 0:a:0 \
+		-filter_complex "loudnorm=i=${loudnorm_i}:print_format=summary" \
+		-f null - 2> .$@ < /dev/null
 	mv .$@ $@
-endif
-
-ifeq (${volume_auto},y)
-obs-${date}-audio-edit.wav: ${obs_recording_cut}
-	${ffmpeg} -i ${obs_recording_cut} /dev/shm/obs-${date}-cut.wav
-	./script/autogain.sh /dev/shm/obs-${date}-cut.wav $@
-	rm -f /dev/shm/obs-${date}-cut.wav
-endif
 
 step2: step2_encode step2_dvd_${run_dvd}
 
-${obs_edited}: ${obs_recording_cut} obs-${date}-audio-edit.wav
-	${ffmpeg} -i ${obs_recording_cut} -i obs-${date}-audio-edit.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 253k -y .${obs_edited}
+${obs_edited}: ${obs_recording} obs-${date}-cut.loudnorm.txt
+	${ffmpeg} ${obs_recording_inp_opt} -i ${obs_recording} -map 0:v -map 0:a:0 \
+		-af "loudnorm=i=${loudnorm_i}:$$(./script/loudnorm2opt.awk obs-${date}-cut.loudnorm.txt)" \
+		-c:v copy -c:a aac -b:a 253k -y .${obs_edited}
 	mv .${obs_edited} ${obs_edited}
 
-step2_encode: ${obs_edited} ${dvd_sources}
+step2_encode: ${dvd_sources}
 	echo skip_dvdvideo_encode=y >> files.mak
 
 step2_dvd_y: dvdvideo-${date}.xml dvdvideo-${date}.iso
