@@ -10,7 +10,7 @@ Manual work is only inserting empty DVD-Rs into a drive.
 In this script, these features are implemented.
 - For each prayer meeting (at Friday evening) and Sunday service.
   - Create workspace
-  - Convert a flv file recorded by OBS Studio to a MPG file for DVD-Video.
+  - Convert a mkv file recorded by OBS Studio to a MPG file for DVD-Video.
   - Adjust audio loudness
 - For each Sunday
   - Make an ISO image file including Friday prayer meeting and Sunday service.
@@ -26,7 +26,7 @@ In this script, these features are implemented.
   - mkisofs provided by [genisoimage](http://cdrkit.org/)
   - dvdrecord provided by [wodim](http://cdrkit.org/)
 - Hardcoded items
-  - Video files should be generated under `~/Videos/` and the format should be `obs-%Y%m%d-%H%M.flv`.
+  - Video files should be generated under `~/Videos/` and the format should be `obs-%Y%m%d-%H%M.mkv`.
   - Prayer meeting starts at 19:30, Sunday service starts at 10:25.
   - First 15 seconds and 45 seconds are removed for Sunday service and Prayer meeting, respectively.
   - Location of this repository.
